@@ -38,8 +38,7 @@ const PreviousWorkDays = ({ previousJourneyAvailable, inWorkDay }) => {
     }
 
     useEffect(() => {
-        axios.defaults.headers.common['Authorization'] = token();
-        axios.post('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { date: new Date().toLocaleString() })
+        axios.get('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { headers: { Authorization: token() } })
             .then((res) => {
                 setPreviousLaborJourneys(res.data.journeys);
             }).catch((err) => {

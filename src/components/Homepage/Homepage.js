@@ -43,8 +43,7 @@ const Homepage = () => {
     });
 
     const getPreviousWorkingDays = async () => {
-        axios.defaults.headers.common['Authorization'] = token();
-        axios.post('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { date: new Date().toLocaleString() })
+        axios.get('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { headers: { Authorization: token() } })
             .then((res) => {
                 if (res.data.journeys.length !== 0) {
                     for (let journey of res.data.journeys) {
@@ -68,7 +67,8 @@ const Homepage = () => {
     }
 
     useEffect(() => {
-        axios.get('https://callcenter-easygo.herokuapp.com/callRegister/getCallsToday', { headers: { Authorization: token() } })
+        axios.defaults.headers.common['Authorization'] = token();
+        axios.post('https://callcenter-easygo.herokuapp.com/callRegister/getCallsToday', { date: new Date().toLocaleString() })
             .then((res) => {
                 if (res.data.journeys.length !== 0) {
                     for (let journey of res.data.journeys) {
