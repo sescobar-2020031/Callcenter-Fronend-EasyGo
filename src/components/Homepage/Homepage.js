@@ -43,7 +43,8 @@ const Homepage = () => {
     });
 
     const getPreviousWorkingDays = async () => {
-        axios.get('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { headers: { Authorization: token() } })
+        axios.defaults.headers.common['Authorization'] = token();
+        axios.post('https://callcenter-easygo.herokuapp.com/callRegister/getAllCalls', { date: new Date().toLocaleString() })
             .then((res) => {
                 if (res.data.journeys.length !== 0) {
                     for (let journey of res.data.journeys) {
