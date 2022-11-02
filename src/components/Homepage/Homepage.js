@@ -71,14 +71,20 @@ const Homepage = () => {
         axios.post('https://callcenter-easygo.herokuapp.com/callRegister/getCallsToday', { date: new Date().toLocaleString() })
             .then((res) => {
                 if (res.data.journeys.length !== 0) {
+                    let callsTodayAvailable = [];
                     for (let journey of res.data.journeys) {
-                        if (journey.state === 'Available') setInWorkDay(true)
+                        if (journey.state === 'Available') setInWorkDay(true);
                         if (journey.calls.length !== 0) {
-                            setCallsAvailable(true);
+                            callsTodayAvailable.push(true)   
                         } else {
-                            setCallsAvailable(false);
-                            getPreviousWorkingDays();
+                            callsTodayAvailable.push(false)
                         }
+                    }
+                    if(callsTodayAvailable.includes(true)){
+                        setCallsAvailable(true);
+                    }else{
+                        setCallsAvailable(false);
+                        getPreviousWorkingDays();
                     }
                     setTodaysJourneyAvailable(true);
                 } else {

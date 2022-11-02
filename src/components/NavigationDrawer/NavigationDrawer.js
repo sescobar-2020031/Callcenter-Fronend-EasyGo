@@ -10,7 +10,7 @@ const NavigationDrawer = ({ logged, setLogged }) => {
     const logout = async () => {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');
-        localStorage.setItem('loggedIn', false);
+        localStorage.removeItem('loggedIn');
         setLogged(false);
     }
 
