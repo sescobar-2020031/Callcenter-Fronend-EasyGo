@@ -10,7 +10,7 @@ const NavigationDrawer = ({ logged, setLogged }) => {
     const logout = async () => {
         localStorage.removeItem('identity');
         localStorage.removeItem('token');
-        localStorage.removeItem('loggedIn');
+        localStorage.setItem('loggedIn', false);
         setLogged(false);
     }
 
@@ -26,11 +26,11 @@ const NavigationDrawer = ({ logged, setLogged }) => {
                         logged ?
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <LinkReact to="/login" style={{ textDecoration: 'none', color: "inherit", marginLeft: "auto" }}>
-                                        <ListItemText onClick={logout}>
+                                    <ListItemText onClick={logout}>
+                                        <LinkReact to="/login" style={{ textDecoration: 'none', color: "inherit", marginLeft: "auto" }}>
                                             Log Out
-                                        </ListItemText>
-                                    </LinkReact>
+                                        </LinkReact>
+                                    </ListItemText>
                                 </ListItemIcon>
                             </ListItemButton>
                             :
